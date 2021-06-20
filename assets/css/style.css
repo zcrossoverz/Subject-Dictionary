@@ -3,3 +3,19 @@
     margin: 0;
     box-sizing: border-box;
 }
+
+body {
+    background: #f8f9fa;
+}
+
+.row {
+    background: #fff;
+    border-radius: 2px;
+}
+.justify-center {
+    justify-content: center;
+}
+.nav {
+    margin: 8px 0;
+    background: #fff;
+}

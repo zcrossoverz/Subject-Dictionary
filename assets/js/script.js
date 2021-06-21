@@ -49,7 +49,45 @@ const maMH = ["QP006","QP007","QP008","QP009","TC100","XH023","XH024","XH025","X
     "CT182",
     "CT179",
     "CT188",
-    "CT190"
+    "CT190",
+
+    "CT189",
+    "CT295",
+    "CT460",
+    "CT113",
+    "CT239",
+    "CT240",
+    "CT241",
+    "CT242",
+    "CT243",
+    "CT244",
+    "CT223",
+    "CT287",
+    "CT250",
+    "CT474",
+    "CT276",
+    "CT246",
+    "CT449",
+    "CT483",
+    "CT446",
+    "CT456",
+    "CT470",
+    "CT457",
+    "CT288",
+    "CT459",
+    "CT199",
+    "CT292",
+    "CT202",
+    "CT211",
+    "CT222",
+    "CT233",
+    "CT258",
+    "CT205",
+    "CT255",
+    "CT316",
+    "CT335",
+    "CT505",
+    "CT553"
 ];
 const tenMH = ["Giáo dục quốc phòng và An ninh 1",
   "Giáo dục quốc phòng và An ninh 2",
@@ -102,7 +140,45 @@ const tenMH = ["Giáo dục quốc phòng và An ninh 1",
   "Ngôn ngữ mô hình hóa",
   "Quản trị hệ thống",
   "Nhập môn lập trình Web",
-  "Nhập môn trí tuệ nhân tạo"
+  "Nhập môn trí tuệ nhân tạo",
+
+  "Nhập môn mô phỏng",
+  "Nền tảng phần mềm nhúng và IoT",
+  "Quản lý quy trình nghiệp vụ",
+  "Nhập môn công nghệ phần mềm",
+  "Niên luận cơ sở ngành KTPM",
+  "Nguyên lý xây dựng phần mềm",
+  "Phân tích yêu cầu phần mềm",
+  "Kiến trúc và Thiết kế phần mềm",
+  "Đảm bảo chất lượng và Kiểm thử phần mềm",
+  "Bảo trì phần mềm",
+  "Quản lý dự án phần mềm",
+  "Kiểm chứng mô hình",
+  "Niên luận ngành Kỹ thuật phần mềm",
+  "Thực tập thực tế - KTPM",
+  "Lập trình Java",
+  "Lập trình .NET",
+  "Phát triển ứng dụng web",
+  "Chuyên đề lập trình trên di động",
+  "Ngôn ngữ lập trình mô phỏng",
+  "Phát triển phần mềm mô phỏng",
+  "Thiết kế hệ thống nhúng và IoT",
+  "Phát triển phần mềm nhúng và IoT",
+  "Kiến trúc phần mềm theo mô hình Client-Server",
+  "Phát triển ứng dụng nghiệp vụ",
+  "Quy hoạch tuyến tính",
+  "Lý thuyết thông tin",
+  "Nguyên lý máy học",
+  "An ninh mạng",
+  "An toàn hệ thống",
+  "Điện toán đám mây",
+  "Phát triển hệ thống thương mại điện tử",
+  "Quản trị cơ sở dữ liệu",
+  "Nghiệp vụ thông minh",
+  "Xử lý ảnh",
+  "Thiết kế và cài đặt mạng",
+  "Tiểu luận tốt nghiệp - KTPM",
+  "Luận văn tốt nghiệp - KTPM"
 
 ];
 const batBuoc = [
@@ -111,7 +187,10 @@ const batBuoc = [
     1,1,1,1,1,1,
     0,0,0,0,0,0,0,
     1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+    1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+
+    1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 ];
 
 let addToAccordion = (id, from, to) => {
@@ -147,67 +226,64 @@ let addToAccordion = (id, from, to) => {
         btnModal.appendChild(document.createTextNode('Xem thêm'));
         bb.appendChild(btnModal);
 
-            //// header
-            let modalHeader = document.createElement('div');
-            modalHeader.setAttribute('class','modal-header');
-            let modalTitle = document.createElement('h5');
-            modalTitle.setAttribute('class','modal-title');
-            modalTitle.setAttribute('id','staticBackdropLabel');
-            modalTitle.appendChild(document.createTextNode(subject.getTen()));
+        //// header
+        let modalHeader = document.createElement('div');
+        modalHeader.setAttribute('class','modal-header');
+        let modalTitle = document.createElement('h5');
+        modalTitle.setAttribute('class','modal-title');
+        modalTitle.setAttribute('id','staticBackdropLabel');
+        modalTitle.appendChild(document.createTextNode(subject.getTen()));
+        let modalBtnClose = document.createElement('div');
+        modalBtnClose.setAttribute('class','btn-close');
+        modalBtnClose.setAttribute('data-bs-dismiss','modal');
+        modalBtnClose.setAttribute('aria-label','Close');
+        modalHeader.appendChild(modalTitle);
+        modalHeader.appendChild(modalBtnClose);
+        //// end header
 
-            let modalBtnClose = document.createElement('div');
-            modalBtnClose.setAttribute('class','btn-close');
-            modalBtnClose.setAttribute('data-bs-dismiss','modal');
-            modalBtnClose.setAttribute('aria-label','Close');
+        //// body
+        let modalBody = document.createElement('div');
+        modalBody.setAttribute('class','modal-body');
+        let modal_mmh = document.createElement('div');
+        modal_mmh.setAttribute('class','row');
+        modal_mmh.appendChild(document.createTextNode('Ma mon hoc: '+subject.getMa()));
+        modalBody.appendChild(modal_mmh);
 
-            modalHeader.appendChild(modalTitle);
-            modalHeader.appendChild(modalBtnClose);
+        if(subject.isBatBuoc()){
+            let modal_bb = document.createElement('div');
+            modal_bb.setAttribute('class','row bg-warning');
+            modal_bb.appendChild(document.createTextNode('Bat buoc'));
+            modalBody.appendChild(modal_bb);
+        }
 
-            //// end header
+        //// end body
 
-            //// body
-            let modalBody = document.createElement('div');
-
-            modalBody.setAttribute('class','modal-body');
-            modalBody.appendChild(document.createTextNode('test'));
-
-
-            //// end body
-
-
-            //// footer
-            let modalFooter = document.createElement('div');
-            modalFooter.setAttribute('class','modal-footer')
-            let footerCloseBtn = document.createElement('button');
-            footerCloseBtn.setAttribute('class','btn btn-secondary');
-            footerCloseBtn.setAttribute('data-bs-dismiss','modal');
-            footerCloseBtn.appendChild(document.createTextNode('Đóng'));
-            modalFooter.appendChild(footerCloseBtn);
-
-
-            //// end footer
-
-            let modalContent = document.createElement('div');
-            modalContent.setAttribute('class','modal-content');
-            modalContent.appendChild(modalHeader);
-            modalContent.appendChild(modalBody);
-            modalContent.appendChild(modalFooter);
-
-            let modalDialog = document.createElement('div');
-            modalDialog.setAttribute('class','modal-dialog');
-            modalDialog.appendChild(modalContent);
-
-
-            let modalDiv = document.createElement('div');
-            modalDiv.setAttribute('class','modal fade');
-            modalDiv.setAttribute('id','modal_'+subject.getId());
-            modalDiv.setAttribute('data-bs-backdrop','static');
-            modalDiv.setAttribute('data-bs-keyboard','false');
-            modalDiv.setAttribute('tabindex','-1');
-            modalDiv.setAttribute('aria-labelledby','staticBackdropLabel');
-            modalDiv.setAttribute('aria-hidden','true');
-
-            modalDiv.appendChild(modalDialog);
+        //// footer
+        let modalFooter = document.createElement('div');
+        modalFooter.setAttribute('class','modal-footer')
+        let footerCloseBtn = document.createElement('button');
+        footerCloseBtn.setAttribute('class','btn btn-secondary');
+        footerCloseBtn.setAttribute('data-bs-dismiss','modal');
+        footerCloseBtn.appendChild(document.createTextNode('Đóng'));
+        modalFooter.appendChild(footerCloseBtn);
+        //// end footer
+        let modalContent = document.createElement('div');
+        modalContent.setAttribute('class','modal-content');
+        modalContent.appendChild(modalHeader);
+        modalContent.appendChild(modalBody);
+        modalContent.appendChild(modalFooter);
+        let modalDialog = document.createElement('div');
+        modalDialog.setAttribute('class','modal-dialog');
+        modalDialog.appendChild(modalContent);
+        let modalDiv = document.createElement('div');
+        modalDiv.setAttribute('class','modal fade');
+        modalDiv.setAttribute('id','modal_'+subject.getId());
+        modalDiv.setAttribute('data-bs-backdrop','static');
+        modalDiv.setAttribute('data-bs-keyboard','false');
+        modalDiv.setAttribute('tabindex','-1');
+        modalDiv.setAttribute('aria-labelledby','staticBackdropLabel');
+        modalDiv.setAttribute('aria-hidden','true');
+        modalDiv.appendChild(modalDialog);
 
         bb.appendChild(modalDiv);
         
@@ -223,3 +299,4 @@ let addToAccordion = (id, from, to) => {
 
 addToAccordion('accordion_dc',0,36);
 addToAccordion('accordion_csn',36,51);
+addToAccordion('accordion_cn',51,maMH.length);
